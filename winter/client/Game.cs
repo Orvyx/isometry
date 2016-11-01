@@ -12,22 +12,22 @@ namespace client
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
+            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             this.IsFixedTimeStep = true; //TURNS OFF CAPPED FRAMES
             this.graphics.SynchronizeWithVerticalRetrace = false; //VSYNC
-
             Content.RootDirectory = "Content";
         }
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
-            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
-
             this.Window.Title = "winter";
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             ScreenManager.Instance.LoadContent(Content);
         }
 
@@ -47,9 +47,9 @@ namespace client
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+            spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
-
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }

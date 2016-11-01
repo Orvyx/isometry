@@ -12,6 +12,7 @@ namespace client
     public class GameScreen
     {
         protected ContentManager content;
+        public Vector2 Dimensions;
 
         public virtual void LoadContent()
         {

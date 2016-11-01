@@ -10,11 +10,20 @@ namespace client
 {
     class SplashScreen : GameScreen
     {
-        Texture2D image;
+        Texture2D texture;
+        private int divisor = 5; // DIVISOR MUST BE > 2!!!
+        int xPos;
+        int yPos;
+        int width;
+        int height;
         public override void LoadContent()
         {
             base.LoadContent();
-            image = content.Load<Texture2D>("");
+            xPos = (int)(ScreenManager.Instance.Dimensions.X / divisor);
+            width = (int)(ScreenManager.Instance.Dimensions.X - ScreenManager.Instance.Dimensions.X / divisor * 2);
+            height = (808 / 1216) * width;
+            yPos = (int)((ScreenManager.Instance.Dimensions.Y - height) / 2);
+            texture = content.Load<Texture2D>("splashLogo");
         }
         public override void UnloadContent()
         {
@@ -22,11 +31,17 @@ namespace client
         }
         public override void Update(GameTime gameTime)
         {
+
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+            spriteBatch.Draw(texture, 
+                new Rectangle ((int)(ScreenManager.Instance.Dimensions.X/ divisor), 
+                    (int)(ScreenManager.Instance.Dimensions.Y / divisor), 
+                    (int)(ScreenManager.Instance.Dimensions.X-ScreenManager.Instance.Dimensions.X / divisor * 2), 
+                    (int)(ScreenManager.Instance.Dimensions.Y-ScreenManager.Instance.Dimensions.Y / divisor * 2)), 
+                Color.White);
         }
     }
 }

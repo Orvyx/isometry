@@ -15,6 +15,7 @@ namespace client
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
 
+        public GameScreen currentScreen { get; set; }
         public static ScreenManager Instance
         {
             get
@@ -26,23 +27,25 @@ namespace client
         }
         public ScreenManager()
         {
-            Dimensions = new Vector2(640, 480);
+            Dimensions = new Vector2(1200, 800);
+            currentScreen = new SplashScreen();
         }
         public void LoadContent(ContentManager Content)
         {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
+            currentScreen.LoadContent();
         }
         public void UnloadContent()
         {
-
+            currentScreen.UnloadContent();
         }
         public void Update(GameTime gameTime)
         {
-
+            currentScreen.Update(gameTime);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            currentScreen.Draw(spriteBatch);
         }
     }
 }
