@@ -27,7 +27,7 @@ namespace client
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(this.GraphicsDevice);
             ScreenManager.Instance.LoadContent(Content);
         }
 
@@ -46,7 +46,7 @@ namespace client
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
             spriteBatch.End();

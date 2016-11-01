@@ -27,7 +27,7 @@ namespace client
         }
         public ScreenManager()
         {
-            Dimensions = new Vector2(1200, 800);
+            Dimensions = new Vector2(1200, 675);
             currentScreen = new SplashScreen();
         }
         public void LoadContent(ContentManager Content)

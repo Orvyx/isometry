@@ -10,7 +10,8 @@ namespace client
 {
     class SplashScreen : GameScreen
     {
-        Texture2D texture;
+        Texture2D splash;
+        Texture2D splashBackground;
         private int divisor = 5; // DIVISOR MUST BE > 2!!!
         int xPos;
         int yPos;
@@ -21,9 +22,10 @@ namespace client
             base.LoadContent();
             xPos = (int)(ScreenManager.Instance.Dimensions.X / divisor);
             width = (int)(ScreenManager.Instance.Dimensions.X - ScreenManager.Instance.Dimensions.X / divisor * 2);
-            height = (808 / 1216) * width;
+            height = (int)((808f/1216f) * width);
             yPos = (int)((ScreenManager.Instance.Dimensions.Y - height) / 2);
-            texture = content.Load<Texture2D>("splashLogo");
+            splash = content.Load<Texture2D>("splashLogo");
+            splashBackground = content.Load<Texture2D>("splashBackground");
         }
         public override void UnloadContent()
         {
@@ -36,12 +38,8 @@ namespace client
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, 
-                new Rectangle ((int)(ScreenManager.Instance.Dimensions.X/ divisor), 
-                    (int)(ScreenManager.Instance.Dimensions.Y / divisor), 
-                    (int)(ScreenManager.Instance.Dimensions.X-ScreenManager.Instance.Dimensions.X / divisor * 2), 
-                    (int)(ScreenManager.Instance.Dimensions.Y-ScreenManager.Instance.Dimensions.Y / divisor * 2)), 
-                Color.White);
+            spriteBatch.Draw(splashBackground, new Rectangle(0, 0, (int)ScreenManager.Instance.Dimensions.X, (int)ScreenManager.Instance.Dimensions.Y), Color.White);
+            spriteBatch.Draw(splash, new Rectangle (xPos, yPos, width, height), Color.White);
         }
     }
 }
