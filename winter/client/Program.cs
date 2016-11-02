@@ -2,7 +2,6 @@
 
 namespace client
 {
-#if WINDOWS || LINUX
     /// <summary>
     /// The main class.
     /// </summary>
@@ -18,5 +17,4 @@ namespace client
                 game.Run();
         }
     }
-#endif
 }
