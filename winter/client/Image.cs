@@ -2,9 +2,9 @@
 
 namespace client
 {
-	public class XmlSerializer
+	public class Image
 	{
-		public XmlSerializer ()
+		public Image ()
 		{
 		}
 	}
