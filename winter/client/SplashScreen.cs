@@ -3,43 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace client
 {
-    class SplashScreen : GameScreen
+    public class SplashScreen : GameScreen
     {
-        Texture2D splash;
-        Texture2D splashBackground;
-        private int divisor = 5; // DIVISOR MUST BE > 2!!!
-        int xPos;
-        int yPos;
-        int width;
-        int height;
+        public Image Splash = new Image();
+        public string Path;
         public override void LoadContent()
         {
+            Splash.Path = "splashLogo";
+            Splash.Scale = new Vector2(ScreenManager.Instance.Dimensions.X / 2000, ScreenManager.Instance.Dimensions.X / 2000);
+            Splash.Position = new Vector2(ScreenManager.Instance.Dimensions.X / 2, ScreenManager.Instance.Dimensions.Y / 2);
+            Splash.Effects = "FadeEffect";
             base.LoadContent();
-            xPos = (int)(ScreenManager.Instance.Dimensions.X / divisor);
-            width = (int)(ScreenManager.Instance.Dimensions.X - ScreenManager.Instance.Dimensions.X / divisor * 2);
-            height = (int)((808f/1216f) * width);
-            yPos = (int)((ScreenManager.Instance.Dimensions.Y - height) / 2);
-            splash = content.Load<Texture2D>("splashLogo");
-            splashBackground = content.Load<Texture2D>("splashBackground");
+            Splash.LoadContent();
         }
         public override void UnloadContent()
         {
             base.UnloadContent();
+            Splash.UnloadContent();
         }
         public override void Update(GameTime gameTime)
         {
-
             base.Update(gameTime);
+            Splash.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(splashBackground, new Rectangle(0, 0, (int)ScreenManager.Instance.Dimensions.X, (int)ScreenManager.Instance.Dimensions.Y), Color.White);
-            spriteBatch.Draw(splash, new Rectangle (xPos, yPos, width, height), Color.White);
+            ScreenManager.Instance.GraphicsDevice.Clear(new Color(44,44,44));
+            Splash.Draw(spriteBatch);
         }
     }
 }

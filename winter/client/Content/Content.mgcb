@@ -55,3 +55,9 @@
 /processorParam:TextureFormat=Color
 /build:splashLogo.png
 
+#begin garamond.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:garamond.spritefont
+

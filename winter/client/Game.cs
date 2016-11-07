@@ -28,6 +28,8 @@ namespace client
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(this.GraphicsDevice);
+            ScreenManager.Instance.GraphicsDevice = this.GraphicsDevice;
+            ScreenManager.Instance.SpriteBatch = spriteBatch;
             ScreenManager.Instance.LoadContent(Content);
         }
 

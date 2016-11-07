@@ -3,13 +3,16 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 namespace client
 {
-    class ScreenManager
+    public class ScreenManager
     {
         private static ScreenManager instance;
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
+        public XmlManager<GameScreen> xmlManager;//comment out for no xml
+        GameScreen currentScreen;
+        public GraphicsDevice GraphicsDevice;
+        public SpriteBatch SpriteBatch;
 
-        public GameScreen currentScreen { get; set; }
         public static ScreenManager Instance
         {
             get
@@ -23,6 +26,10 @@ namespace client
         {
             Dimensions = new Vector2(1200, 675);
             currentScreen = new SplashScreen();
+            xmlManager = new XmlManager<GameScreen>();//comment out for no xml
+            xmlManager.Type = currentScreen.Type;//comment out for no xml
+            currentScreen = xmlManager.Load("Load/SplashScreen.xml");//comment out for no xml
+
         }
         public void LoadContent(ContentManager Content)
         {
