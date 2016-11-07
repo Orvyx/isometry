@@ -8,7 +8,8 @@ namespace client
 {
 	public class XmlManager<T>
 	{
-		public Type Type{ get; set; };
+        public object Obj { get; private set; }
+        public Type Type{ get; set; }
 		public T LoaderOptimization(string path)
 		{
 			T instance;
