@@ -29,6 +29,7 @@ namespace client
             base.Update(gameTime);
             if (this.image.IsActive)
             {
+                System.Diagnostics.Debug.WriteLine("HERE");
                 if (!Increase)
                     image.Alpha -= FadeSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 else

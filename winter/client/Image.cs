@@ -13,15 +13,14 @@ namespace client
         public Texture2D Texture;
         public Vector2 Position, Scale;
         public Rectangle SourceRect;
-        public bool IsActive;
+        public bool IsActive = true;
 
         Vector2 origin;
         ContentManager content;
         RenderTarget2D renderTarget;
         SpriteFont font;
         Dictionary<string, ImageEffect> effectList;
-        public string Effects = "FadeEffect";
-
+        public string Effects;
         public FadeEffect FadeEffect = new FadeEffect();
 
         void SetEffect<T>(ref T effect, bool active = true)
@@ -56,7 +55,7 @@ namespace client
         }
         public Image()
         {
-            Path = Text= Effects = String.Empty;
+            Path = Text = Effects = String.Empty;
             FontName = "garamond";
             Position = Vector2.Zero;
             Scale = Vector2.One;

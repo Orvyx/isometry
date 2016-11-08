@@ -13,7 +13,7 @@ namespace client
         public bool IsActive;
         public ImageEffect()
         {
-            IsActive = true;
+            IsActive = false;
         }
         public virtual void LoadContent(ref Image Image)
         {

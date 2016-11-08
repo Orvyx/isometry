@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+
 namespace client
 {
     public class ScreenManager
@@ -8,10 +10,11 @@ namespace client
         private static ScreenManager instance;
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
-        public XmlManager<GameScreen> xmlManager;//comment out for no xml
-        GameScreen currentScreen;
+       // public XmlManager<GameScreen> xmlManager;//comment out for no xml
+        GameScreen currentScreen, newScreen;
         public GraphicsDevice GraphicsDevice;
         public SpriteBatch SpriteBatch;
+        public Image Image;
 
         public static ScreenManager Instance
         {
@@ -22,13 +25,22 @@ namespace client
                 return instance;
             }
         }
+        public void ChangeScreen(string screenName)
+        {
+            newScreen = (GameScreen)Activator.CreateInstance(Type.GetType("client." + screenName));
+
+        }
+        void Transition()
+        {
+
+        }
         public ScreenManager()
         {
             Dimensions = new Vector2(1200, 675);
             currentScreen = new SplashScreen();
-            xmlManager = new XmlManager<GameScreen>();//comment out for no xml
-            xmlManager.Type = currentScreen.Type;//comment out for no xml
-            currentScreen = xmlManager.Load("Load/SplashScreen.xml");//comment out for no xml
+            //xmlManager = new XmlManager<GameScreen>();//comment out for no xml
+            //xmlManager.Type = currentScreen.Type;//comment out for no xml
+            //currentScreen = xmlManager.Load("Load/SplashScreen.xml");//comment out for no xml
 
         }
         public void LoadContent(ContentManager Content)

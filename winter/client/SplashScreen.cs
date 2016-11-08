@@ -12,13 +12,14 @@ namespace client
     public class SplashScreen : GameScreen
     {
         public Image Splash = new Image();
-        public string Path;
+        //public string Path;
         public override void LoadContent()
         {
             Splash.Path = "splashLogo";
             Splash.Scale = new Vector2(ScreenManager.Instance.Dimensions.X / 2000, ScreenManager.Instance.Dimensions.X / 2000);
             Splash.Position = new Vector2(ScreenManager.Instance.Dimensions.X / 2, ScreenManager.Instance.Dimensions.Y / 2);
             Splash.Effects = "FadeEffect";
+            //Splash.IsActive = true;
             base.LoadContent();
             Splash.LoadContent();
         }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System.Xml.Serialization;//comment out for no xml
+//using System.Xml.Serialization;//comment out for no xml
 using System;
 
 namespace client
@@ -11,11 +11,11 @@ namespace client
         protected ContentManager content;
         public Vector2 Dimensions;
 
-        [XmlIgnore] //comment out for no xml
-        public Type Type;//comment out for no xml
+        //[XmlIgnore] //comment out for no xml
+        //public Type Type;//comment out for no xml
         public GameScreen()
         {
-           Type = this.GetType();//comment out for no xml
+           //Type = this.GetType();//comment out for no xml
         }
         public virtual void LoadContent()
         {
