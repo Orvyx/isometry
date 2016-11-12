@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace client
@@ -12,14 +6,14 @@ namespace client
     public class SplashScreen : GameScreen
     {
         public Image Splash = new Image();
+        double elapsedSeconds = 0;
         //public string Path;
         public override void LoadContent()
         {
             Splash.Path = "splashLogo";
             Splash.Scale = new Vector2(ScreenManager.Instance.Dimensions.X / 2000, ScreenManager.Instance.Dimensions.X / 2000);
             Splash.Position = new Vector2(ScreenManager.Instance.Dimensions.X / 2, ScreenManager.Instance.Dimensions.Y / 2);
-            Splash.Effects = "FadeEffect";
-            //Splash.IsActive = true;
+            //Splash.Effects = "FadeEffect";
             base.LoadContent();
             Splash.LoadContent();
         }
@@ -32,6 +26,12 @@ namespace client
         {
             base.Update(gameTime);
             Splash.Update(gameTime);
+            elapsedSeconds += gameTime.ElapsedGameTime.TotalSeconds;
+            if((InputManager.Instance.AnyKeyPressed() && !ScreenManager.Instance.IsTransitioning) || elapsedSeconds >= 3.0f)
+            {
+                elapsedSeconds = 0;
+                ScreenManager.Instance.ChangeScreen("TitleScreen");
+            }
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

@@ -13,7 +13,8 @@ namespace client
         public Texture2D Texture;
         public Vector2 Position, Scale;
         public Rectangle SourceRect;
-        public bool IsActive = true;
+        public bool IsActive = false;
+        public bool AccountForOrigin = false;
 
         Vector2 origin;
         ContentManager content;
@@ -33,7 +34,8 @@ namespace client
                 var obj = this;
                 (effect as ImageEffect).LoadContent(ref obj);
             }
-            effectList.Add(effect.GetType().ToString().Replace("client.", ""), (effect as ImageEffect));
+            if(!effectList.ContainsKey(effect.GetType().ToString().Replace("client.", "")))
+                effectList.Add(effect.GetType().ToString().Replace("client.", ""), (effect as ImageEffect));
 
         }
         public void ActivateEffect(string effect)
@@ -53,10 +55,28 @@ namespace client
                 effectList[effect].UnloadContent();
             }
         }
+        public void StoreEffects()
+        {
+            Effects = String.Empty;
+            foreach(var effect in effectList)
+            {
+                if (effect.Value.IsActive)
+                    Effects += effect.Key + ":";
+            }
+            Effects.Remove(Effects.Length - 1);
+        }
+        public void RestoreEffects()
+        {
+            foreach(var effect in effectList)
+                DeactivateEffect(effect.Key);
+            string[] split = Effects.Split(':');
+            foreach (string s in split)
+                ActivateEffect(s);
+        }
         public Image()
         {
             Path = Text = Effects = String.Empty;
-            FontName = "garamond";
+            FontName = "default";
             Position = Vector2.Zero;
             Scale = Vector2.One;
             Alpha = 1.0f;
@@ -67,9 +87,9 @@ namespace client
         {
             content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
             if (Path != String.Empty)
-                Texture = content.Load<Texture2D>(Path);
+                Texture = content.Load<Texture2D>("Images/" + Path);
 
-            font = content.Load<SpriteFont>(FontName);
+            font = content.Load<SpriteFont>("Fonts/" + FontName);
             Vector2 dimensions = Vector2.Zero;
 
             if (Texture != null)
@@ -127,7 +147,10 @@ namespace client
         public void Draw(SpriteBatch spriteBatch)
         {
             origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
-            spriteBatch.Draw(Texture, Position /*+ origin*Scale*/, SourceRect, Color.White * Alpha, 0.0f, origin, Scale, SpriteEffects.None, 0.0f);
+            if(!AccountForOrigin)
+                spriteBatch.Draw(Texture, Position, SourceRect, Color.White * Alpha, 0.0f, origin, Scale, SpriteEffects.None, 0.0f);
+            else
+                spriteBatch.Draw(Texture, Position + origin * Scale, SourceRect, Color.White * Alpha, 0.0f, origin, Scale, SpriteEffects.None, 0.0f);
 
         }
 	}

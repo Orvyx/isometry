@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace client
 {
@@ -11,10 +6,15 @@ namespace client
     {
         public float FadeSpeed;
         public bool Increase;
-        public FadeEffect(float fadeSpeed = 1, bool increase = false)
+        public float MaxAlpha;
+        public float MinAlpha;
+
+        public FadeEffect(float fadeSpeed = 1, bool increase = false, float maxAlpha = 1.0f, float minAlpha = 0.0f)
         {
             FadeSpeed = fadeSpeed;
             Increase = increase;
+            MaxAlpha = maxAlpha;
+            MinAlpha = minAlpha;
         }
         public override void LoadContent(ref Image image)
         {
@@ -29,24 +29,23 @@ namespace client
             base.Update(gameTime);
             if (this.image.IsActive)
             {
-                System.Diagnostics.Debug.WriteLine("HERE");
                 if (!Increase)
                     image.Alpha -= FadeSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 else
                     image.Alpha += FadeSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (image.Alpha < 0.0f)
+                if (image.Alpha < MinAlpha)
                 {
                     Increase = true;
-                    image.Alpha = 0.0f;
+                    image.Alpha = MinAlpha;
                 }
-                else if (image.Alpha > 1.0f)
+                else if (image.Alpha > MaxAlpha)
                 {
                     Increase = false;
-                    image.Alpha = 1.0f;
+                    image.Alpha = MaxAlpha;
                 }
             }
             else
-                image.Alpha = 1.0f;
+                image.Alpha = MaxAlpha;
         }
     }
 }

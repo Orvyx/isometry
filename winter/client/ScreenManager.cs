@@ -14,33 +14,55 @@ namespace client
         GameScreen currentScreen, newScreen;
         public GraphicsDevice GraphicsDevice;
         public SpriteBatch SpriteBatch;
-        public Image Image;
-
+        public Image Fade;
+        public bool IsTransitioning { get; private set; }
+        public bool Quit = false;
         public static ScreenManager Instance
         {
             get
             {
                 if (instance == null)
+                {
                     instance = new ScreenManager();
+                    instance.Fade = new Image();
+                    instance.Fade.Path = "Fade";
+                    instance.Fade.Scale = new Vector2(Instance.Dimensions.X, Instance.Dimensions.Y);
+                }
                 return instance;
             }
         }
         public void ChangeScreen(string screenName)
         {
             newScreen = (GameScreen)Activator.CreateInstance(Type.GetType("client." + screenName));
-
+            Fade.LoadContent();
+            Fade.IsActive = true;
+            //.Effects = "FadeEffect";
+            Fade.FadeEffect.Increase = true;
+            Fade.Alpha = 0.01f;
+            IsTransitioning = true;
         }
-        void Transition()
+        void Transition(GameTime gameTime)
         {
-
+            if (IsTransitioning)
+            {
+                Fade.Update(gameTime);
+                if(Fade.Alpha == 1.0f)
+                {
+                    currentScreen.UnloadContent();
+                    currentScreen = newScreen;
+                    currentScreen.LoadContent();
+                }
+                else if(Fade.Alpha == 0.0f)
+                {
+                    Fade.IsActive = false;
+                    IsTransitioning = false;
+                }
+            }
         }
         public ScreenManager()
         {
             Dimensions = new Vector2(1200, 675);
-            currentScreen = new SplashScreen();
-            //xmlManager = new XmlManager<GameScreen>();//comment out for no xml
-            //xmlManager.Type = currentScreen.Type;//comment out for no xml
-            //currentScreen = xmlManager.Load("Load/SplashScreen.xml");//comment out for no xml
+            currentScreen = new SplashScreen(); ///SETS THE STARTING SCREEN. SplashScreen IS DEFAULT. CHANGE TO OTHERS FOR TESTING.
 
         }
         public void LoadContent(ContentManager Content)
@@ -55,10 +77,17 @@ namespace client
         public void Update(GameTime gameTime)
         {
             currentScreen.Update(gameTime);
+            Transition(gameTime);
+            if (Quit)
+            {
+                currentScreen.UnloadContent();
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             currentScreen.Draw(spriteBatch);
+            if (IsTransitioning)
+                Fade.Draw(spriteBatch);
         }
     }
 }

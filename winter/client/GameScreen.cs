@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-//using System.Xml.Serialization;//comment out for no xml
-using System;
-
 namespace client
 {
     public class GameScreen
@@ -27,7 +24,7 @@ namespace client
         }
         public virtual void Update(GameTime gameTime)
         {
-
+            InputManager.Instance.Update();
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
