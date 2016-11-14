@@ -18,22 +18,26 @@ namespace client
         {
             base.LoadContent();
             Player.LoadContent();
-            map = content.Load<Map>("TestMap") as Map;
-
+            XmlManager<Map> mapLoader = new XmlManager<Map>();
+            map = mapLoader.Load("Content/TestMap.xml");
+            map.LoadContent();
         }
         public override void UnloadContent()
         {
             base.UnloadContent();
             Player.UnloadContent();
+            map.UnloadContent();
         }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             Player.Update(gameTime);
+            map.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+            map.Draw(spriteBatch);
             Player.Draw(spriteBatch);
         }
     }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
 namespace client
 {
     public class Map
     {
-        public string Location;
-        public List<Layer> Layer;
         public Vector2 TileDimensions;
+        [XmlElement("Layer")]
+        public List<Layer> Layer;
         public Map()
         {
             Layer = new List<Layer>();

@@ -50,7 +50,7 @@ namespace client
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.Clear(Color.Black);
             this.Window.Title = "winter - " + 1 / gameTime.ElapsedGameTime.TotalSeconds;
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
