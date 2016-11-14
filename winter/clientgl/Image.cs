@@ -22,9 +22,11 @@ namespace client
         SpriteFont font;
         Dictionary<string, ImageEffect> effectList;
         public string Effects;
-        public FadeEffect FadeEffect = new FadeEffect();
 
-        void SetEffect<T>(ref T effect, bool active = true)
+        public FadeEffect FadeEffect = new FadeEffect();
+        public SpriteSheetEffect SpriteSheetEffect = new SpriteSheetEffect();
+
+        void SetEffect<T>(ref T effect, bool active = false)
         {
             if (effect == null)
                 effect = (T)Activator.CreateInstance(typeof(T));
@@ -121,6 +123,7 @@ namespace client
             ScreenManager.Instance.GraphicsDevice.SetRenderTarget(null);
 
             SetEffect<FadeEffect>(ref FadeEffect);
+            SetEffect<SpriteSheetEffect>(ref SpriteSheetEffect);
             if(Effects != String.Empty)
             {
                 string[] split = Effects.Split(':');

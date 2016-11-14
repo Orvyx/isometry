@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "game", "client\game.csproj", "{8249783D-D246-4F7B-ACE4-369014B4347D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monodevelop", "monodevelop\monodevelop.csproj", "{E60C1BEB-D599-4CF3-9390-9DEFD0DBBD29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gamegl", "clientgl\gamegl.csproj", "{8249783D-D246-4F7B-ACE4-369014B4347D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{8249783D-D246-4F7B-ACE4-369014B4347D}.Debug|x86.Build.0 = Debug|x86
 		{8249783D-D246-4F7B-ACE4-369014B4347D}.Release|x86.ActiveCfg = Release|x86
 		{8249783D-D246-4F7B-ACE4-369014B4347D}.Release|x86.Build.0 = Release|x86
-		{E60C1BEB-D599-4CF3-9390-9DEFD0DBBD29}.Debug|x86.ActiveCfg = Debug|x86
-		{E60C1BEB-D599-4CF3-9390-9DEFD0DBBD29}.Debug|x86.Build.0 = Debug|x86
-		{E60C1BEB-D599-4CF3-9390-9DEFD0DBBD29}.Release|x86.ActiveCfg = Release|x86
-		{E60C1BEB-D599-4CF3-9390-9DEFD0DBBD29}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

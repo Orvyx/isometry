@@ -62,7 +62,7 @@ namespace client
         public ScreenManager()
         {
             Dimensions = new Vector2(1200, 675);
-            currentScreen = new SplashScreen(); ///SETS THE STARTING SCREEN. SplashScreen IS DEFAULT. CHANGE TO OTHERS FOR TESTING.
+            currentScreen = new GameplayScreen(); ///SETS THE STARTING SCREEN. SplashScreen IS DEFAULT. CHANGE TO OTHERS FOR TESTING.
 
         }
         public void LoadContent(ContentManager Content)

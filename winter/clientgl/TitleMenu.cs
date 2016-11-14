@@ -15,6 +15,8 @@ namespace client
             Effects = "FadeEffect";
 
             NewGame.Image.Text = "New Game";
+            NewGame.LinkType = "Screen";
+            NewGame.LinkID = "GameplayScreen";
 
             LoadGame.Image.Text = "Load Game";
 
