@@ -33,13 +33,13 @@ namespace client
         }
         public void ChangeScreen(string screenName)
         {
-            newScreen = (GameScreen)Activator.CreateInstance(Type.GetType("client." + screenName));
-            Fade.LoadContent();
-            Fade.IsActive = true;
-            //.Effects = "FadeEffect";
-            Fade.FadeEffect.Increase = true;
-            Fade.Alpha = 0.01f;
-            IsTransitioning = true;
+                newScreen = (GameScreen)Activator.CreateInstance(Type.GetType("client." + screenName));
+                Fade.LoadContent();
+                Fade.IsActive = true;
+                Fade.Effects = "FadeEffect";
+                Fade.FadeEffect.Increase = true;
+                Fade.Alpha = 0.01f;
+                IsTransitioning = true;
         }
         void Transition(GameTime gameTime)
         {

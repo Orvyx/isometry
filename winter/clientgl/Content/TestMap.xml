@@ -5,7 +5,7 @@
     <Y>32</Y>
   </TileDimensions>
   <Layer>
-    <Path>terrain</Path>
+    <Sheet>Ground_1</Sheet>
     <TileMap>
       <Row>[0:0][0:0][0:0][0:0][0:0][0:0][0:0][0:0][0:0][0:0]</Row>
       <Row>[0:0][0:0][0:0][0:0][0:0][0:0][0:0][0:0][0:0][0:0]</Row>

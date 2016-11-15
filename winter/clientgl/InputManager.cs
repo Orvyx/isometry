@@ -38,7 +38,19 @@ namespace client
         }
         public bool AnyKeyPressed()
         {
+            if (currentKeyState.GetPressedKeys().Length > 0 && previousKeyState.GetPressedKeys().Length == 0)
+                return true;
+            return false;
+        }
+        public bool AnyKeyDown()
+        {
             if (currentKeyState.GetPressedKeys().Length > 0)
+                return true;
+            return false;
+        }
+        public bool NoKeysDown()
+        {
+            if (currentKeyState.GetPressedKeys().Length == 0)
                 return true;
             return false;
         }

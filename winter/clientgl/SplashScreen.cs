@@ -7,13 +7,12 @@ namespace client
     {
         public Image Splash = new Image();
         double elapsedSeconds = 0;
-        //public string Path;
         public override void LoadContent()
         {
-            Splash.Path = "splashLogo";
+            Splash.Path = "Splash_1";
             Splash.Scale = new Vector2(ScreenManager.Instance.Dimensions.X / 2000, ScreenManager.Instance.Dimensions.X / 2000);
             Splash.Position = new Vector2(ScreenManager.Instance.Dimensions.X / 2, ScreenManager.Instance.Dimensions.Y / 2);
-            //Splash.Effects = "FadeEffect";
+            Splash.Effects = "FadeEffect";
             base.LoadContent();
             Splash.LoadContent();
         }
@@ -27,10 +26,10 @@ namespace client
             base.Update(gameTime);
             Splash.Update(gameTime);
             elapsedSeconds += gameTime.ElapsedGameTime.TotalSeconds;
-            if((InputManager.Instance.AnyKeyPressed() && !ScreenManager.Instance.IsTransitioning) || elapsedSeconds >= 3.0f)
+            if(InputManager.Instance.AnyKeyPressed() || elapsedSeconds >= 3.0f)
             {
-                elapsedSeconds = 0;
-                ScreenManager.Instance.ChangeScreen("TitleScreen");
+                    elapsedSeconds = 0;
+                    ScreenManager.Instance.ChangeScreen("TitleScreen");
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

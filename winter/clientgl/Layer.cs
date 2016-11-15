@@ -25,7 +25,7 @@ namespace client
         private Image Image = new Image();
         [XmlElement("TileMap")]
         public TileMap Tile;
-        public string Path
+        public string Sheet
         {
             get
             {
@@ -33,7 +33,7 @@ namespace client
             }
             set
             {
-                Image.Path = value;
+                Image.Path = "TileSheet/"+ value;
             }
         }
         List<Tile> tiles;

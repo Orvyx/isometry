@@ -24,7 +24,7 @@ namespace client
         }
         public void LoadContent()
         {
-            Image.Path = "ExampleCharacter";
+            Image.Path = "Player_Example";
             Image.Effects = "SpriteSheetEffect";
             Image.Position = new Vector2(20, 20);
             Image.LoadContent();

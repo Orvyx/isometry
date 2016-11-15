@@ -78,7 +78,7 @@ namespace client
         public Image()
         {
             Path = Text = Effects = String.Empty;
-            FontName = "default";
+            FontName = "Default";
             Position = Vector2.Zero;
             Scale = Vector2.One;
             Alpha = 1.0f;
