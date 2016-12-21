@@ -52,7 +52,7 @@ namespace client
         {
             this.GraphicsDevice.Clear(Color.Black);
             this.Window.Title = "winter - " + 1 / gameTime.ElapsedGameTime.TotalSeconds;
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Camera.Instance.GetTransformation());
             ScreenManager.Instance.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

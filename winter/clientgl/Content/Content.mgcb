@@ -87,3 +87,15 @@
 /processorParam:Quality=Best
 /build:Sounds\Effect_1.wav
 
+#begin Images/TileSheet/Isometric_Ground_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/TileSheet/Isometric_Ground_1.png
+

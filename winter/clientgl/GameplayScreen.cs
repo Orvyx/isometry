@@ -20,6 +20,8 @@ namespace client
             Player.LoadContent();
             XmlManager<Map> mapLoader = new XmlManager<Map>();
             map = mapLoader.Load("Content/TestMap.xml");
+            Camera.Instance.Zoom = 0.2f;
+            Camera.Instance.Position = Player.Image.Position;
             map.LoadContent();
         }
         public override void UnloadContent()
@@ -32,7 +34,8 @@ namespace client
         {
             base.Update(gameTime);
             Player.Update(gameTime);
-            map.Update(gameTime);
+            map.Update(gameTime, ref Player);
+            Camera.Instance.Position = Player.Image.Position;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

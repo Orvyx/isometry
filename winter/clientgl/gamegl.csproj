@@ -57,6 +57,7 @@
     <StartupObject>client.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Camera.cs" />
     <Compile Include="FadeEffect.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameplayScreen.cs" />

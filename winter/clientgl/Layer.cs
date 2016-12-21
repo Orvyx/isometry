@@ -17,14 +17,22 @@ namespace client
         {
             [XmlElement("Row")]
             public List<String> Row;
+
             public TileMap()
             {
                 Row = new List<String>();
             }
         }
         private Image Image = new Image();
+
         [XmlElement("TileMap")]
         public TileMap Tile;
+
+        [XmlElement("SolidTiles")]
+        public string SolidTiles;
+
+        CollisionState state;
+
         public string Sheet
         {
             get
@@ -42,30 +50,46 @@ namespace client
         public Layer()
         {
             tiles = new List<Tile>();
+            SolidTiles = String.Empty;
         }
         public void LoadContent(Vector2 tileDimensions)
         {
             Image.LoadContent();
             Vector2 position = -tileDimensions;
+            position.X = -tileDimensions.X / 2;
+            position.Y += tileDimensions.Y / 2;
+            Vector2 startingRowPosition = position;
             foreach(string row in Tile.Row)
             {
                 string[] split = row.Split(']');
-                position.X = -tileDimensions.X;
-                position.Y += tileDimensions.Y;
+                position.X = startingRowPosition.X;
+                position.Y = startingRowPosition.Y;
                 foreach(string s in split)
                 {
                     if(s != String.Empty)
                     {
-                        position.X += tileDimensions.X;
-                        tiles.Add(new Tile());
+                        position.X += tileDimensions.X / 2;
+                        position.Y += tileDimensions.Y / 4;
+                        if (!s.Contains("x"))
+                        {
+                            state = CollisionState.PASSIVE;
+                            tiles.Add(new Tile());
 
-                        string str = s.Replace("[", String.Empty);
-                        int value1 = int.Parse(str.Substring(0, str.IndexOf(':')));
-                        int value2 = int.Parse(str.Substring(str.IndexOf(':') + 1));
-                        tiles[tiles.Count - 1].LoadContent(position, new Rectangle(value1 * (int)tileDimensions.X, value2 * (int)tileDimensions.Y, (int)tileDimensions.X, (int)tileDimensions.Y));
+                            string str = s.Replace("[", String.Empty);
+                            int value1 = int.Parse(str.Substring(0, str.IndexOf(':')));
+                            int value2 = int.Parse(str.Substring(str.IndexOf(':') + 1));
 
+                            if(SolidTiles.Contains("[" + value1.ToString() + ":" + value2.ToString() + "]"))
+                            {
+                                state = CollisionState.SOLID;
+                            }
+
+                            tiles[tiles.Count - 1].LoadContent(position, new Rectangle(value1 * (int)tileDimensions.X, value2 * (int)tileDimensions.Y, (int)tileDimensions.X, (int)tileDimensions.Y), state);
+                        }
                     }
                 }
+                startingRowPosition.X = startingRowPosition.X - (tileDimensions.X / 2);
+                startingRowPosition.Y = startingRowPosition.Y + (tileDimensions.Y / 4);
             }
 
         }
@@ -73,9 +97,10 @@ namespace client
         {
             Image.UnloadContent();
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, ref Player player)
         {
-
+            foreach (Tile tile in tiles)
+                tile.Update(gameTime, ref player);
         }
         public void Draw(SpriteBatch spriteBatch)
         {

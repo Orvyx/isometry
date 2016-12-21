@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+public enum CollisionState { SOLID, PASSIVE}
 namespace client
 {
     public class Tile
     {
         Vector2 position;
         Rectangle sourceRect;
+        CollisionState state;
 
         public Rectangle SourceRect
         {
@@ -21,18 +23,42 @@ namespace client
         {
             get { return position; }
         }
-        public void LoadContent(Vector2 position, Rectangle sourceRect)
+        public void LoadContent(Vector2 position, Rectangle sourceRect, CollisionState state)
         {
             this.position = position;
             this.sourceRect = sourceRect;
+            this.state = state;
         }
         public void UnloadContent()
         {
 
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, ref Player player)
         {
-
+            if(state == CollisionState.SOLID)
+            {
+                Rectangle tileRect = new Rectangle((int)Position.X, (int)Position.Y, sourceRect.Width, sourceRect.Height);
+                Rectangle playerRect = new Rectangle((int)player.Image.Position.X, (int)player.Image.Position.Y, player.Image.SourceRect.Width, player.Image.SourceRect.Height);
+                if (playerRect.Intersects(tileRect))
+                {
+                    ///ORIGINAL
+                    /*
+                    if (player.Velocity.X < 0)
+                        player.Image.Position.X = tileRect.Right;
+                    else if (player.Velocity.X > 0)
+                        player.Image.Position.X = tileRect.Left - player.Image.SourceRect.Width;
+                    else if (player.Velocity.Y < 0)
+                        player.Image.Position.Y = tileRect.Bottom;
+                    else
+                        player.Image.Position.Y = tileRect.Top - player.Image.SourceRect.Height;
+                    */
+                    ///ALTERNATIVE
+                    if (player.Velocity.X != 0)
+                        player.Image.Position.X = player.prevPosition.X - (player.Image.Position.X- player.prevPosition.X);
+                    if (player.Velocity.Y != 0)
+                        player.Image.Position.Y = player.prevPosition.Y +  (player.prevPosition.Y - player.Image.Position.Y);
+                }
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

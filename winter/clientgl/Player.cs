@@ -12,11 +12,12 @@ using System.Diagnostics;
 
 namespace client
 {
-    class Player
+    public class Player
     {
         public Image Image = new Image();
         public Vector2 Velocity = new Vector2(0,0);
-        public float MoveSpeed = 100.0f;
+        public float MoveSpeed = 1000.0f;
+        public Vector2 prevPosition;
 
         public Player()
         {
@@ -42,12 +43,12 @@ namespace client
                     Velocity.Y = 0;
                 else if (InputManager.Instance.KeyDown(Keys.S))
                 {
-                    Velocity.Y = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Velocity.Y = (MoveSpeed / 2) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     Image.SpriteSheetEffect.CurrentFrame.Y = 0;
                 }
                 else if (InputManager.Instance.KeyDown(Keys.W))
                 {
-                    Velocity.Y = -MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    Velocity.Y = -(MoveSpeed / 2) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                     Image.SpriteSheetEffect.CurrentFrame.Y = 3;
                 }
                 else
@@ -75,6 +76,7 @@ namespace client
             if (Velocity.X == 0 && Velocity.Y == 0)
                 Image.IsActive = false;
             Image.Update(gameTime);
+            prevPosition = Image.Position;
             Image.Position += Velocity;
         }
         public void Draw(SpriteBatch spriteBatch)
