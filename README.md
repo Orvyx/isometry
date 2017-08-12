@@ -1,2 +1,2 @@
-# winter
-Test project for using Monogame.
+# isometry
+Test project for using Monogame, with basic isometric functionality.
